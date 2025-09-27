@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="BtgBrownianMotion.Views.MainPage"
+    Title="Brownian Motion Simulator">
+
+    <Grid Padding="16" RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" ColumnDefinitions="*,*,*,*,*,auto" ColumnSpacing="12">
+            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                <Label Text="Preço inicial"/>
+                <Entry Text="{Binding InitialPrice}" Keyboard="Numeric"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                <Label Text="Volatilidade média (%)"/>
+                <Entry Text="{Binding Volatility}" Keyboard="Numeric" Placeholder="Ex.: 20"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="2" Spacing="4">
+                <Label Text="Retorno médio (%)"/>
+                <Entry Text="{Binding MeanReturn}" Keyboard="Numeric" Placeholder="Ex.: 1"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="3" Spacing="4">
+                <Label Text="Tempo (dias)"/>
+                <Entry Text="{Binding Days}" Keyboard="Numeric"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="4" Spacing="4">
+                <Label Text="N° de simulações"/>
+                <Stepper Minimum="1" Maximum="10" Increment="1" Value="{Binding Simulations}" />
+                <Label Text="{Binding Simulations, StringFormat='x{0}'}" FontAttributes="Bold" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="5" Spacing="8" HorizontalOptions="End">
+                <Button Text="Simular" Command="{Binding SimulateCommand}"/>
+                <Button Text="Limpar"  Command="{Binding ClearCommand}"/>
+                <HorizontalStackLayout Spacing="6">
+                    <CheckBox IsChecked="{Binding ShowGrid}" />
+                    <Label Text="Grade"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="6">
+                    <CheckBox IsChecked="{Binding ShowLegend}" />
+                    <Label Text="Legenda"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+
+        <GraphicsView x:Name="Chart" Grid.Row="1" HeightRequest="480" />
+    </Grid>
+</ContentPage>
+
